@@ -1,0 +1,50 @@
+syntax = "proto3";
+package TurboMessage;
+
+service TurboMessage {
+
+    rpc registrar_usuario (Usuario) returns (Status){};
+    rpc registrar_correo (Correo) returns (Mensaje){};
+
+    rpc inicio_sesion(Usuario) returns (Status);
+
+    rpc borrar_correo_recibido(Correo) returns (Status);
+    rpc borrar_correo_enviado (Correo) returns (Status);
+    rpc marcar_leido(Correo) returns (Status);
+
+
+    rpc listado_correos_enviados (Usuario) returns (stream Correo) {};
+    rpc listado_correos_recibidos (Usuario) returns (stream Correo) {};
+    rpc listado_usuarios (Empty) returns (stream Usuario) {};
+    rpc listado_correos (Empty) returns (stream Correo) {};
+}
+
+message Empty {}
+
+message Status {
+    optional bool success = 1; 
+}
+
+message Mensaje {
+    optional string message = 1; 
+}
+
+message Usuario {
+    optional string username = 1; 
+    optional string password = 2; 
+    optional int32 enviados = 3;
+    optional int32 recibidos = 4;
+}
+
+message Correo {
+    optional int32 id = 1;
+    optional string tema = 2;
+    optional string cuerpo = 3;
+    optional bool leido = 4; 
+    optional string emisor = 5;
+    optional string receptor = 6;
+    optional string emisorRespaldo = 7;
+    optional string receptorRespaldo = 8;
+   
+}
+
