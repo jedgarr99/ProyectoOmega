@@ -98,7 +98,7 @@ Para cumplir con los requerimientos del proyecto se utilizaron los siguientes m�
     rpc borrar_correo_enviado (Correo) returns (Status); #Se utiliza una bandera para que si el emisor y el receptor eliminan el mensaje este sea eliminado del servidor también
     rpc marcar_leido(Correo) returns (Status); #Se actualiza el atributo leído del objeto correo
 
-#Los siguientes métodos se utilizan para poder visualizar la información almacenada en el servidor
+    #Los siguientes métodos se utilizan para poder visualizar la información almacenada en el servidor
     rpc listado_correos_enviados (Usuario) returns (stream Correo) {};
     rpc listado_correos_recibidos (Usuario) returns (stream Correo) {};
     rpc listado_usuarios (Empty) returns (stream Usuario) {};
