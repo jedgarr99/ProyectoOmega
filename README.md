@@ -15,7 +15,7 @@
 
 - La arquitectura de TurboMessage está diseñada para cumplir con los requisitos de rendimiento, escalabilidad y persistencia del servicio de mensajería. El sistema se compone de dos componentes principales: el cliente y el servidor 
 - El cliente es una interfaz de consola que permite a los usuarios interactuar con el servidor. Los usuarios pueden registrarse en el sistema, enviar y recibir correos electrónicos, y realizar otras acciones típicas de un servicio de mensajería. La interfaz de consola utiliza gRPC para comunicarse con el servidor.
-- El servidor es responsable de gestionar todas las solicitudes de los clientes y proporcionar los servicios de correo electrónico. El servidor utiliza gRPC y Protocol Buffers para la comunicación entre el cliente y el servidor. Además, el servidor mantiene una conexión persistente con la base de datos, lo que permite que los correos electrónicos sean persistentes.
+- El servidor es responsable de gestionar todas las solicitudes de los clientes y proporcionar los servicios de correo electrónico. El servidor utiliza gRPC y Protocol Buffers para la comunicación entre el cliente y el servidor. Además, el servidor mantiene una conexión persistente y se tienen diccionarios en donde estamos guardando la información, simular a lo que sería una base de datos, lo que permite que los correos electrónicos sean persistentes.
 
 
 ##### ¿Cómo funciona la interfaz del cliente?
@@ -53,7 +53,56 @@ Se incluye una función para eliminar correos de la bandeja de enviados y de la 
 ![ELiminar correo ](https://github.com/jedgarr99/ProyectoOmega/blob/master/imgs/7BorrarCoreo.png)
 *Imagen 7. Eliminar correo*
 
+##### Objetos
+Para cumplir con los requerimientos del proyecto se utilizaron los siguientes objetos. Primero, los definimos en el .proto para después utilizarlos en nuestro servidor
 
+    message Empty {}
+
+    message Status {
+        optional bool success = 1; 
+    }
+
+    message Mensaje {
+        optional string message = 1; 
+    }
+
+    message Usuario {
+        optional string username = 1; 
+        optional string password = 2; 
+        optional int32 enviados = 3;
+        optional int32 recibidos = 4;
+    }
+
+    message Correo {
+        optional int32 id = 1;
+        optional string tema = 2;
+        optional string cuerpo = 3;
+        optional bool leido = 4; 
+        optional string emisor = 5;
+        optional string receptor = 6;
+        optional string emisorRespaldo = 7;
+        optional string receptorRespaldo = 8;
+
+    }
+
+
+##### Métodos
+Para cumplir con los requerimientos del proyecto se utilizaron los siguientes métodos. Primero, los definimos en el .proto para después utilizarlos en nuestro servidor
+
+    rpc registrar_usuario (Usuario) returns (Status){}; #Para registrar un usuario checamos que no exista uno con el mismo username porque es un identificador único
+    rpc registrar_correo (Correo) returns (Mensaje){};  #Checamos que el emisor tiene menos de 5 enviados y que el receptor tiene menos de 5 recibidos pues es uno de nuestros límites.
+
+    rpc inicio_sesion(Usuario) returns (Status); #Checamos que el username y la password coincidan con lo que tenemos guardado en el servidor
+
+    rpc borrar_correo_recibido(Correo) returns (Status); #Se utiliza una bandera para que si el emisor y el receptor eliminan el mensaje este sea eliminado del servidor también
+    rpc borrar_correo_enviado (Correo) returns (Status); #Se utiliza una bandera para que si el emisor y el receptor eliminan el mensaje este sea eliminado del servidor también
+    rpc marcar_leido(Correo) returns (Status); #Se actualiza el atributo leído del objeto correo
+
+#Los siguientes métodos se utilizan para poder visualizar la información almacenada en el servidor
+    rpc listado_correos_enviados (Usuario) returns (stream Correo) {};
+    rpc listado_correos_recibidos (Usuario) returns (stream Correo) {};
+    rpc listado_usuarios (Empty) returns (stream Usuario) {};
+    rpc listado_correos (Empty) returns (stream Correo) {};
 
 ##### Conclusiones
 
