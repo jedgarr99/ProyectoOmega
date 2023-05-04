@@ -60,8 +60,12 @@ Se incluye una función para eliminar correos de la bandeja de enviados y de la 
 
 
 ##### Conclusiones
-
-
+Turbo Message es un servidor que simula un e-mail con ciertas restricciones entre las cuales están: 
+-Un máximo de 5 correos envíados y recibidos
+-Manejarse con comunicación GRPC y ProtocolBuffers
+-Contar con una interfaz para el cliente
+-Realizar funciones similares a las de un correo normal (enviar, recibir, eliminar mensajes. Leído no leído)
+Turbo Message es un proyecto interesante que permite a los usuarios enviar y recibir correos electrónicos de manera limitada, pero con la ventaja de tener una arquitectura diseñada para garantizar la escalabilidad, el rendimiento y la persistencia del servicio de mensajería. GRPC nos pareció una tecnología con mucha lógica e intuitiva para el desarrollador. Este proyecto nos hizo preguntarnos como se deben realizar las funciones básicas para uno de los servicios que utilizamos día a día y nos permitió comprender la lógica detrás de estros procesos. Además consideramos positivo el hecho de que algunos procesos los realizamos de una manera diferente a la de un correo convencional de tal forma que el sistema fuera de nuestro total agrado.
 
 
 
