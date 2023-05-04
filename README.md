@@ -90,8 +90,11 @@ Para cumplir con los requerimientos del proyecto se utilizaron los siguientes ob
 
 ##### Métodos
 Para cumplir con los requerimientos del proyecto se utilizaron los siguientes métodos. Primero, los definimos en el .proto para después utilizarlos en nuestro servidor. Además, para evitar la condición de carrera se utilizaron candados con la implementación del siguiente código.
+
     ServidorTurboMessage.lock_registro.acquire()
+    
 El propósito principal de utilizar candados en el código es garantizar la integridad de los datos y prevenir situaciones en las que múltiples hilos o procesos accedan a la misma sección crítica al mismo tiempo, lo que puede generar problemas como la corrupción de datos o condiciones de carrera.
+
 Así, se logra controlar el acceso a las zonas críticas del código, como variables compartidas y los diccionarios de almacenamiento. Además con esto logramos proteger la lógica del funcionamiento del servidor. Por ejemplo, en el método de registrar usuario, dos usuarios podrían tratar de registrarse al mismo tiempo con el mismo username y si no se pone un candado podríamos encontrarnos con dos usernames iguales.
 
     rpc registrar_usuario (Usuario) returns (Status){}; #Para registrar un usuario checamos que no exista uno con el mismo username porque es un identificador único
