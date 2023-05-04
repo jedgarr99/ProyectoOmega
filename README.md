@@ -28,29 +28,29 @@ el menu cuenta con 3 opciones, la primera para registrarse (si es que aún no ti
 *Imagen 1. Interfaz Menu*
 
 
-![Interfaz de registro](https://github.com/jedgarr99/ProyectoOmega/blob/master/imgs/2Registro.png).  
+![Interfaz de registro](https://github.com/jedgarr99/ProyectoOmega/blob/master/imgs/2Registro.png)
 *Imagen 2. Opción para registrarse*
 
-![Interfaz de login](https://github.com/jedgarr99/ProyectoOmega/blob/master/imgs/3InicioSesion.png).  
+![Interfaz de login](https://github.com/jedgarr99/ProyectoOmega/blob/master/imgs/3InicioSesion.png)
 *Imagen 3. Opción para hacer login*
 
 - Menu de correo:
 En el menu de correo se tienen las diferentes opciones para ue el usuario se comunique. Primero, la opción para escribir correo, segundo para ver los correos recibidos y tercero opción para ver los correos enviados. Adicionalmente está lac cuarta opción para regresar el menú de inicio y la quinta para cerrar la aplicación.
 
-![Interfaz de menu correo](https://github.com/jedgarr99/ProyectoOmega/blob/master/imgs/4VerMailRecibido.png).  
+![Interfaz de menu correo](https://github.com/jedgarr99/ProyectoOmega/blob/master/imgs/4VerMailRecibido.png)
 *Imagen 4. Menu de correo*
 
-![Ver mails recibidos](https://github.com/jedgarr99/ProyectoOmega/blob/master/imgs/4VerMailRecibido.png). 
+![Ver mails recibidos](https://github.com/jedgarr99/ProyectoOmega/blob/master/imgs/4VerMailRecibido.png)
 *Imagen 5. Opción ver mails recibidos*
 
 Se incluye una función para que el usuario vea si ya ha leído el correo en cuestión. Los correos leídos aparecen con una palomita mientras que los correos no leídos tienen una cruz.
 
-![Correos leídos ](https://github.com/jedgarr99/ProyectoOmega/blob/master/imgs/5CorreoLeido.png).  
+![Correos leídos ](https://github.com/jedgarr99/ProyectoOmega/blob/master/imgs/5CorreoLeido.png)
 *Imagen 6. Notificación de leído*
 
 Se incluye una función para eliminar correos de la bandeja de enviados y de la bandeja de recibidos. Así se libera el espacio de la bandeja puesto que hay un limite en correos enviados y recibidos de 5 correos.
 
-![ELiminar correo ](https://github.com/jedgarr99/ProyectoOmega/blob/master/imgs/7BorrarCoreo.png).   
+![ELiminar correo ](https://github.com/jedgarr99/ProyectoOmega/blob/master/imgs/7BorrarCoreo.png)
 *Imagen 7. Eliminar correo*
 
 
