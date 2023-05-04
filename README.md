@@ -58,7 +58,7 @@ Se incluye una función para eliminar correos de la bandeja de enviados y de la 
 ##### Conclusiones
 
 Turbo Message es un servidor que simula un e-mail con ciertas restricciones entre las cuales están: 
--Un máximo de 5 correos envíados y recibidos
+-Un máximo de 5 correos enviados y recibidos
 -Manejarse con comunicación GRPC y ProtocolBuffers
 -Contar con una interfaz para el cliente
 -Realizar funciones similares a las de un correo normal (enviar, recibir, eliminar mensajes. Leído no leído)
