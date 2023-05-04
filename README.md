@@ -13,9 +13,9 @@
 
 ##### ¿Cómo se comunican el servidor y los clientes?
 
--La arquitectura de TurboMessage está diseñada para cumplir con los requisitos de rendimiento, escalabilidad y persistencia del servicio de mensajería. El sistema se compone de dos componentes principales: el cliente y el servidor 
--El cliente es una interfaz de consola que permite a los usuarios interactuar con el servidor. Los usuarios pueden registrarse en el sistema, enviar y recibir correos electrónicos, y realizar otras acciones típicas de un servicio de mensajería. La interfaz de consola utiliza gRPC para comunicarse con el servidor.
--El servidor es responsable de gestionar todas las solicitudes de los clientes y proporcionar los servicios de correo electrónico. El servidor utiliza gRPC y Protocol Buffers para la comunicación entre el cliente y el servidor. Además, el servidor mantiene una conexión persistente con la base de datos, lo que permite que los correos electrónicos sean persistentes.
+- La arquitectura de TurboMessage está diseñada para cumplir con los requisitos de rendimiento, escalabilidad y persistencia del servicio de mensajería. El sistema se compone de dos componentes principales: el cliente y el servidor 
+- El cliente es una interfaz de consola que permite a los usuarios interactuar con el servidor. Los usuarios pueden registrarse en el sistema, enviar y recibir correos electrónicos, y realizar otras acciones típicas de un servicio de mensajería. La interfaz de consola utiliza gRPC para comunicarse con el servidor.
+- El servidor es responsable de gestionar todas las solicitudes de los clientes y proporcionar los servicios de correo electrónico. El servidor utiliza gRPC y Protocol Buffers para la comunicación entre el cliente y el servidor. Además, el servidor mantiene una conexión persistente con la base de datos, lo que permite que los correos electrónicos sean persistentes.
 
 
 ##### ¿Cómo funciona la interfaz del cliente?
