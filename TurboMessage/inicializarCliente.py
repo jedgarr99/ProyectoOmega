@@ -16,15 +16,15 @@ def run():
 
 
         #Agregar estado
-        res=stub.registrar_correo(turboMessage_pb2.Correo(tema="Te amo 1 ",cuerpo="para siempre", emisor="Jorge", receptor="Anairam"))
+        res=stub.registrar_correo(turboMessage_pb2.Correo(tema="Tarea",cuerpo="Lorem Ipsum is simply dummy text of the printing and \n typesetting industry. Lorem Ipsum has been the industry's \nstandard dummy text ever since the 1500s, when an unknown printer\n took a galley of type and scrambled it ", emisor="Jorge", receptor="Anairam"))
         print("Se pudo mandar correo : ",res)
-        res=stub.registrar_correo(turboMessage_pb2.Correo(tema="Te amo 2 ",cuerpo="para siempre", emisor="Jorge", receptor="Anairam"))
+        res=stub.registrar_correo(turboMessage_pb2.Correo(tema="Distribuidos",cuerpo="Lorem Ipsum is simply dummy text of the printing and \n typesetting industry. Lorem Ipsum has been the industry's \nstandard dummy text ever since the 1500s, when an unknown printer\n took a galley of type and scrambled it ", emisor="Jorge", receptor="Anairam"))
         print("Se pudo mandar correo : ",res)
-        res=stub.registrar_correo(turboMessage_pb2.Correo(tema="Te amo 3 ",cuerpo="para siempre", emisor="Jorge", receptor="Anairam"))
+        res=stub.registrar_correo(turboMessage_pb2.Correo(tema="Se escapo el gato",cuerpo="Lorem Ipsum is simply dummy text of the printing and \n typesetting industry. Lorem Ipsum has been the industry's \nstandard dummy text ever since the 1500s, when an unknown printer\n took a galley of type and scrambled it ", emisor="Jorge", receptor="Anairam"))
         print("Se pudo mandar correo : ",res)
-        res=stub.registrar_correo(turboMessage_pb2.Correo(tema="Te amordido el perro 1 ",cuerpo="para siempre", emisor="Anairam", receptor="Jorge"))
+        res=stub.registrar_correo(turboMessage_pb2.Correo(tema="Tarea Python",cuerpo="Lorem Ipsum is simply dummy text of the printing and \n typesetting industry. Lorem Ipsum has been the industry's \nstandard dummy text ever since the 1500s, when an unknown printer\n took a galley of type and scrambled it ", emisor="Anairam", receptor="Jorge"))
         print("Se pudo mandar correo : ",res)
-        res=stub.registrar_correo(turboMessage_pb2.Correo(tema="Te amordido el perro 2 ",cuerpo="para siempre", emisor="Anairam", receptor="Jorge"))
+        res=stub.registrar_correo(turboMessage_pb2.Correo(tema="Renta de Libro ",cuerpo="Lorem Ipsum is simply dummy text of the printing and \n typesetting industry. Lorem Ipsum has been the industry's \nstandard dummy text ever since the 1500s, when an unknown printer\n took a galley of type and scrambled it ", emisor="Anairam", receptor="Jorge"))
         print("Se pudo mandar correo : ",res)
 
         
