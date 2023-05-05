@@ -3,26 +3,26 @@
 
 
 
-"Turbo Message" es un servicio de mensajería que replica la funcionalidad de un servidor de correo electrónico con ciertas restricciones. El proyecto debe implementar todas sus comunicaciones utilizando gRPC y Protocol Buffers. Los usuarios pueden interactuar con TurboMessage a través de una interfaz de consola que ofrece un menú de opciones para acceder a todas las funcionalidades del sistema. 
+"Turbo Message" es un servicio de mensajería que replica la funcionalidad de un servidor de correo electrónico con ciertas restricciones. El proyecto implementa todas sus comunicaciones utilizando gRPC y Protocol Buffers. Los usuarios pueden interactuar con TurboMessage a través de una interfaz de consola que ofrece un menú de opciones para acceder a todas las funcionalidades del sistema. 
 
 
-##### ¿Cómo se puede utilizar Turbo Message"?
+##### ¿Qué puede hacer un usuario de Turbo Message"?
 
 - Los usuarios pueden registrarse de forma persistente en TurboMessage creando un nombre de usuario y una contraseña. Con sus credenciales, los usuarios pueden enviar y consultar correos electrónicos. Sin embargo, un usuario no puede tener más de 5 correos en su bandeja de entrada o salida, lo que significa que si alguien intenta enviar un correo electrónico a un usuario cuya bandeja de entrada está llena, recibirá un mensaje de error.
 - Los usuarios pueden enviar y recibir correos electrónicos a otros usuarios existentes siempre que el nombre de usuario del destinatario exista en el sistema. Un correo electrónico tiene un identificador, un tema, un emisor, un destinatario y un cuerpo de mensaje. Los correos electrónicos tienen estados de no leído y leído, y dichos estados deben ser persistentes.
 
 ##### ¿Cómo se comunican el servidor y los clientes?
 
-- La arquitectura de TurboMessage está diseñada para cumplir con los requisitos de rendimiento, escalabilidad y persistencia del servicio de mensajería. El sistema se compone de dos componentes principales: el cliente y el servidor 
+- La arquitectura de TurboMessage está diseñada para cumplir con los requisitos de rendimiento, escalabilidad y persistencia del servicio de mensajería. El sistema se compone de dos elementos principales: el **cliente** y el **servidor** 
 - El cliente es una interfaz de consola que permite a los usuarios interactuar con el servidor. Los usuarios pueden registrarse en el sistema, enviar y recibir correos electrónicos, y realizar otras acciones típicas de un servicio de mensajería. La interfaz de consola utiliza gRPC para comunicarse con el servidor.
-- El servidor es responsable de gestionar todas las solicitudes de los clientes y proporcionar los servicios de correo electrónico. El servidor utiliza gRPC y Protocol Buffers para la comunicación entre el cliente y el servidor. Además, el servidor mantiene una conexión persistente y se tienen diccionarios en donde estamos guardando la información, simular a lo que sería una base de datos, lo que permite que los correos electrónicos sean persistentes.
+- El servidor es responsable de gestionar todas las solicitudes de los clientes y proporcionar los servicios de correo electrónico. El servidor utiliza gRPC y Protocol Buffers para la comunicación entre el cliente y el servidor. Además, el servidor mantiene una conexión persistente y se tienen diccionarios en donde estamos guardando la información, similar a lo que sería una base de datos, lo que permite que los correos electrónicos sean persistentes.
 
 
 ##### ¿Cómo funciona la interfaz del cliente?
 
-La interfaz del cliente se maneja desde la consola. Para cada sección incluye diferentes opciones y el usuario escribe en la consola el número con la opción que desea.
+La interfaz del cliente se maneja desde la consola. Cada sección incluye diferentes opciones, que el usuario elige escribiendo en la consola el número de la opción que desea.
 - Menu de inicio:
-el menu cuenta con 3 opciones, la primera para registrarse (si es que aún no tiene una cuenta), la segunda para iniciar sesión (con su usuario y contraseña) y la tercera para cerrrar la aplicación.
+El menu cuenta con 3 opciones, la primera para registrarse (si es que aún no tiene una cuenta), la segunda para iniciar sesión (con su usuario y contraseña) y la tercera para cerrrar la aplicación.
 
 ![Interfaz de Menu](https://github.com/jedgarr99/ProyectoOmega/blob/master/imgs/1MenuInicio.png)
 *Imagen 1. Interfaz Menu*
@@ -54,20 +54,24 @@ Se incluye una función para eliminar correos de la bandeja de enviados y de la 
 *Imagen 7. Eliminar correo*
 
 ##### Objetos
-Para cumplir con los requerimientos del proyecto se utilizaron los siguientes objetos. Primero, los definimos en el .proto para después utilizarlos en nuestro servidor
+Para cumplir con los requerimientos del proyecto,  se definieron en el .proto los objetos utilizados por el cliente y el servidor. Los objetos utilizados fueron:
+  
+  
+Se agrega para aquellas funciones que no devuelven nada o no reciben nada
+    message Empty {} 
 
-    message Empty {} #Se agrega para aquellas funciones que no devuelven nada o no reciben nada
-
-    Se utilizó para devolver el status de un método y saber si fue satisfactorio u ocurrió una falla
+Devuelve el status de un método para saber si su ejecución fue satisfactoria u ocurrió una falla
     message Status {
         optional bool success = 1; 
     }
 
-    Se utilizó para devolver mensajes de error de casos específicos
+Devuelve mensajes del resultado de ejecución de mandar un mensaje 
     message Mensaje {
         optional string message = 1; 
     }
 
+  
+Contiene la información principal de nuestros usuarios   
     message Usuario {
         optional string username = 1; 
         optional string password = 2; 
@@ -75,6 +79,7 @@ Para cumplir con los requerimientos del proyecto se utilizaron los siguientes ob
         optional int32 recibidos = 4;
     }
 
+Contiene la información principal de nuestros correos
     message Correo {
         optional int32 id = 1;
         optional string tema = 2;
