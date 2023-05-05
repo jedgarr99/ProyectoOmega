@@ -104,7 +104,7 @@ El propósito principal de utilizar candados en el código es garantizar la inte
 
 Así, se logra controlar el acceso a las zonas críticas del código, como variables compartidas y los diccionarios de almacenamiento. Además, con esto logramos proteger la lógica del funcionamiento del servidor. Por ejemplo, en el método de registrar usuario, dos usuarios podrían tratar de registrarse al mismo tiempo con el mismo username y si no se pone un candado podríamos encontrarnos con dos usernames iguales.
 
-##### ¿Cómo funciona la interfaz del cliente?
+#### ¿Cómo funciona la interfaz del cliente?
 
 La interfaz del cliente se maneja desde la consola. Cada sección incluye diferentes opciones, que el usuario elige escribiendo en la consola el número de la opción que desea.
 - Menu de inicio:
@@ -141,7 +141,7 @@ Se incluye una función para eliminar correos de la bandeja de enviados y de la 
 
 
 
-##### Conclusiones
+#### Conclusiones
 
 Turbo Message es un servidor que simula un e-mail con ciertas restricciones, entre las cuales están: 
 - Un máximo de 5 correos enviados y recibidos
