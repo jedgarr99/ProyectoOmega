@@ -53,28 +53,28 @@ Se incluye una función para eliminar correos de la bandeja de enviados y de la 
 ![ELiminar correo ](https://github.com/jedgarr99/ProyectoOmega/blob/master/imgs/7BorrarCoreo.png)
 *Imagen 7. Eliminar correo*
 
-##### Objetos
+#### Objetos
 Para cumplir con los requerimientos del proyecto,  se definieron en el .proto los objetos utilizados por el cliente y el servidor. Los objetos utilizados fueron:
   
   
-Se agrega para aquellas funciones que no devuelven nada o no reciben nada. 
+**Empty**: Se agrega para aquellas funciones que no devuelven nada o no reciben nada. 
 
     message Empty {} 
 
-Devuelve el status de un método para saber si su ejecución fue satisfactoria u ocurrió una falla. 
+**Status**: Devuelve el status de un método para saber si su ejecución fue satisfactoria u ocurrió una falla. 
 
     message Status {
         optional bool success = 1; 
     }
 
-Devuelve mensajes del resultado de ejecución de mandar un mensaje. 
+**Mensaje**:Devuelve mensajes del resultado de ejecución de mandar un mensaje. 
 
     message Mensaje {
         optional string message = 1; 
     }
 
   
-Contiene la información principal de nuestros usuarios. 
+**Usuario**:Contiene la información principal de nuestros usuarios. 
 
     message Usuario {
         optional string username = 1; 
@@ -83,7 +83,7 @@ Contiene la información principal de nuestros usuarios.
         optional int32 recibidos = 4;
     }
 
-Contiene la información principal de nuestros correos. 
+**Correo**:Contiene la información principal de nuestros correos. 
 
     message Correo {
         optional int32 id = 1;
@@ -99,28 +99,46 @@ Contiene la información principal de nuestros correos.
 
 
 ##### Métodos
-Para cumplir con los requerimientos del proyecto se utilizaron los siguientes métodos. Primero, los definimos en el .proto para después utilizarlos en nuestro servidor. Además, para evitar la condición de carrera se utilizaron candados con la implementación del siguiente código.
+Para cumplir con los requerimientos del proyecto definimos en el .proto, para después utilizarlos en nuestro servidor, los siguientes metodos:  
+
+Para registrar un usuario checamos que no exista uno con el mismo username porque es un identificador único. 
+
+    rpc registrar_usuario (Usuario) returns (Status){}; 
+    
+Checamos que el emisor tiene menos de 5 enviados y que el receptor tiene menos de 5 recibidos pues es uno de nuestros límites. 
+
+    rpc registrar_correo (Correo) returns (Mensaje){};  
+
+Checamos que el username y la password coincidan con lo que tenemos guardado en el servidor. 
+
+    rpc inicio_sesion(Usuario) returns (Status); 
+    
+Se utiliza una bandera para que si el emisor y el receptor eliminan el mensaje este sea eliminado del servidor también. 
+
+    rpc borrar_correo_recibido(Correo) returns (Status); 
+Se utiliza una bandera para que si el emisor y el receptor eliminan el mensaje este sea eliminado del servidor también. 
+
+    rpc borrar_correo_enviado (Correo) returns (Status); 
+    
+Se actualiza el atributo leído del objeto correo. 
+
+    rpc marcar_leido(Correo) returns (Status); 
+
+Los siguientes métodos se utilizan para poder visualizar la información almacenada en el servidor. 
+
+
+    rpc listado_correos_enviados (Usuario) returns (stream Correo) {};
+    rpc listado_correos_recibidos (Usuario) returns (stream Correo) {};
+    rpc listado_usuarios (Empty) returns (stream Usuario) {};
+    rpc listado_correos (Empty) returns (stream Correo) {};
+    
+Además, para evitar la condición de carrera se utilizaron candados con la implementación del siguiente código.
 
     ServidorTurboMessage.lock_registro.acquire()
     
 El propósito principal de utilizar candados en el código es garantizar la integridad de los datos y prevenir situaciones en las que múltiples hilos o procesos accedan a la misma sección crítica al mismo tiempo, lo que puede generar problemas como la corrupción de datos o condiciones de carrera.
 
 Así, se logra controlar el acceso a las zonas críticas del código, como variables compartidas y los diccionarios de almacenamiento. Además con esto logramos proteger la lógica del funcionamiento del servidor. Por ejemplo, en el método de registrar usuario, dos usuarios podrían tratar de registrarse al mismo tiempo con el mismo username y si no se pone un candado podríamos encontrarnos con dos usernames iguales.
-
-    rpc registrar_usuario (Usuario) returns (Status){}; #Para registrar un usuario checamos que no exista uno con el mismo username porque es un identificador único
-    rpc registrar_correo (Correo) returns (Mensaje){};  #Checamos que el emisor tiene menos de 5 enviados y que el receptor tiene menos de 5 recibidos pues es uno de nuestros límites.
-
-    rpc inicio_sesion(Usuario) returns (Status); #Checamos que el username y la password coincidan con lo que tenemos guardado en el servidor
-
-    rpc borrar_correo_recibido(Correo) returns (Status); #Se utiliza una bandera para que si el emisor y el receptor eliminan el mensaje este sea eliminado del servidor también
-    rpc borrar_correo_enviado (Correo) returns (Status); #Se utiliza una bandera para que si el emisor y el receptor eliminan el mensaje este sea eliminado del servidor también
-    rpc marcar_leido(Correo) returns (Status); #Se actualiza el atributo leído del objeto correo
-
-    #Los siguientes métodos se utilizan para poder visualizar la información almacenada en el servidor
-    rpc listado_correos_enviados (Usuario) returns (stream Correo) {};
-    rpc listado_correos_recibidos (Usuario) returns (stream Correo) {};
-    rpc listado_usuarios (Empty) returns (stream Usuario) {};
-    rpc listado_correos (Empty) returns (stream Correo) {};
 
 ##### Conclusiones
 
