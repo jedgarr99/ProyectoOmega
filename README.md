@@ -57,21 +57,25 @@ Se incluye una función para eliminar correos de la bandeja de enviados y de la 
 Para cumplir con los requerimientos del proyecto,  se definieron en el .proto los objetos utilizados por el cliente y el servidor. Los objetos utilizados fueron:
   
   
-Se agrega para aquellas funciones que no devuelven nada o no reciben nada
+Se agrega para aquellas funciones que no devuelven nada o no reciben nada. 
+
     message Empty {} 
 
-Devuelve el status de un método para saber si su ejecución fue satisfactoria u ocurrió una falla
+Devuelve el status de un método para saber si su ejecución fue satisfactoria u ocurrió una falla. 
+
     message Status {
         optional bool success = 1; 
     }
 
-Devuelve mensajes del resultado de ejecución de mandar un mensaje 
+Devuelve mensajes del resultado de ejecución de mandar un mensaje. 
+
     message Mensaje {
         optional string message = 1; 
     }
 
   
-Contiene la información principal de nuestros usuarios   
+Contiene la información principal de nuestros usuarios. 
+
     message Usuario {
         optional string username = 1; 
         optional string password = 2; 
@@ -79,7 +83,8 @@ Contiene la información principal de nuestros usuarios
         optional int32 recibidos = 4;
     }
 
-Contiene la información principal de nuestros correos
+Contiene la información principal de nuestros correos. 
+
     message Correo {
         optional int32 id = 1;
         optional string tema = 2;
